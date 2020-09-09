@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
@@ -27,15 +28,47 @@ public class LoginCase {
     }
 
     @Test
-    public void test() throws InterruptedException {
+    public void testFailed01() throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
         loginpage.inputPhone("13212312312");
         loginpage.inputPassword("123123123");
         loginpage.clickLoginBtn();
-        Thread.sleep(2000);
         String actual = loginpage.getCenterErrorText();
         String expected = "此账号没有经过授权，请联系管理员!";
         Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testFailed02() throws InterruptedException {
+        LoginPage loginpage = new LoginPage(driver);
+        loginpage.inputPhone("");
+        loginpage.inputPassword("123123123");
+        loginpage.clickLoginBtn();
+        String actual = loginpage.getFormErrorText();
+        String expected = "请输入手机号";
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test(dataProvider = "datas")
+    public void testFailed03(String phone, String password, String expected) throws InterruptedException {
+        LoginPage loginpage = new LoginPage(driver);
+        loginpage.inputPhone(phone);
+        loginpage.inputPassword(password);
+        loginpage.clickLoginBtn();
+        String actual = loginpage.getFormErrorText();
+        Assert.assertEquals(actual, expected);
+    }
+
+    @DataProvider
+    public Object[][] datas() {
+        Object[][] datas = {
+//                {"13212312312", "123123123", "此账号没有经过授权，请联系管理员!"},
+                {"", "123123123", "请输入手机号"},
+                {"1585901925", "123123123", "请输入正确的手机号"},
+                {"158590192534", "123123123", "请输入正确的手机号"},
+                {"1585901925%", "123123123", "请输入正确的手机号"},
+        };
+        return datas;
     }
 
     @AfterClass

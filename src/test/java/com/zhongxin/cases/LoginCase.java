@@ -1,5 +1,6 @@
 package com.zhongxin.cases;
 
+import com.zhongxin.pages.LoginPage;
 import okio.Timeout;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,44 +20,28 @@ public class LoginCase {
 
     @BeforeClass
     public void setUp() {
-        //1.打开浏览器
+        //打开浏览器
         driver = open("chrome");
-        //2.访问登陆页面
+        //访问登陆页面
         driver.get("http://120.78.128.25:8765/Index/login.html");
     }
 
     @Test
     public void test() throws InterruptedException {
-        //3.输入用户名
-        driver.findElement(By.name("phone")).sendKeys("13323234545");
-        //4.输入密码
-        driver.findElement(By.name("password")).sendKeys("lemon123456");
-        //5.点击登陆按钮
-        driver.findElement(By.xpath("//button[@class='btn btn-special']")).click();
+        LoginPage loginpage = new LoginPage(driver);
+        loginpage.inputPhone("13212312312");
+        loginpage.inputPassword("123123123");
+        loginpage.clickLoginBtn();
         Thread.sleep(2000);
-        //6.断言
-        //6.1:url地址判断
-        String actualUrl = driver.getCurrentUrl();
-        String expectedUrl = "http://120.78.128.25:8765/Index/index";
-        Assert.assertEquals(actualUrl, expectedUrl);
-        //6.2用户名匹配
-//        WebElement element = driver.findElement(By.xpath("//a[contains(text(),'我的帐户[自动化测试帐号1]')]"));
-//        boolean displayed = element.isDisplayed();
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, 5);
-            WebElement until = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'我的帐户[自动化测试帐号1]')]")));
-            boolean displayed = until.isDisplayed();
-            Assert.assertTrue(displayed);
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-            Assert.assertTrue(false);
-        }
-
+        String actual = loginpage.getCenterErrorText();
+        String expected = "此账号没有经过授权，请联系管理员!";
+        Assert.assertEquals(actual, expected);
     }
 
     @AfterClass
     public void tearDown() throws InterruptedException {
-        //6.关闭浏览器
+        Thread.sleep(2000);
+        //关闭浏览器
         close(driver);
     }
 

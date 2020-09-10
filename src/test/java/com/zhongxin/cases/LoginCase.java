@@ -1,5 +1,6 @@
 package com.zhongxin.cases;
 
+import com.zhongxin.pages.IndexPage;
 import com.zhongxin.pages.LoginPage;
 import okio.Timeout;
 import org.openqa.selenium.*;
@@ -44,7 +45,7 @@ public class LoginCase {
         loginpage.inputPhone("");
         loginpage.inputPassword("123123123");
         loginpage.clickLoginBtn();
-        String actual = loginpage.getFormErrorText();
+        String actual = loginpage.getPhoneFormErrorText();
         String expected = "请输入手机号";
         Assert.assertEquals(actual, expected);
     }
@@ -55,14 +56,46 @@ public class LoginCase {
         loginpage.inputPhone(phone);
         loginpage.inputPassword(password);
         loginpage.clickLoginBtn();
-        String actual = loginpage.getFormErrorText();
+        String actual = loginpage.getPhoneFormErrorText();
         Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testFailed04() throws InterruptedException {
+        LoginPage loginpage = new LoginPage(driver);
+        loginpage.inputPhone("15859019251");
+        loginpage.inputPassword("");
+        loginpage.clickLoginBtn();
+        String actual = loginpage.getPasswordFormErrorText();
+        Assert.assertEquals(actual, "请输入密码");
+    }
+
+    @Test
+    public void testFailed05() throws InterruptedException {
+        LoginPage loginpage = new LoginPage(driver);
+        loginpage.inputPhone("13323234545");
+        loginpage.inputPassword("123123123");
+        loginpage.clickLoginBtn();
+        String actual = loginpage.getCenterErrorText();
+        Assert.assertEquals(actual, "帐号或密码错误!");
+    }
+
+    @Test
+    public void testSuccess() throws InterruptedException {
+        LoginPage loginpage = new LoginPage(driver);
+        loginpage.inputPhone("13323234545");
+        loginpage.inputPassword("lemon123456");
+        loginpage.clickLoginBtn();
+        Thread.sleep(2000);
+        IndexPage indexPage = new IndexPage(driver);
+        boolean flag = indexPage.nicknameIsVisibility();
+        Assert.assertTrue(flag);
+
     }
 
     @DataProvider
     public Object[][] datas() {
         Object[][] datas = {
-//                {"13212312312", "123123123", "此账号没有经过授权，请联系管理员!"},
                 {"", "123123123", "请输入手机号"},
                 {"1585901925", "123123123", "请输入正确的手机号"},
                 {"158590192534", "123123123", "请输入正确的手机号"},

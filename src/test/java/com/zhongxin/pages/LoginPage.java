@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
     private WebDriver driver;
 
@@ -18,13 +18,15 @@ public class LoginPage {
     private By loginBtnBy = By.xpath("//button[@class='btn btn-special']");
     //页面中央错误提示
     private By centerErrorBy = By.className("layui-layer-content");
-    //页面红色错误提示
-    private By formErrorBy = By.className("form-error-info");
-
+    //页面手机红色错误提示
+    private By phoneformErrorBy = By.xpath("//input[@name='phone']//following-sibling::div");
+    //页面密码红色错误提示
+    private By passwordformErrorBy = By.xpath("//input[@name='password']//following-sibling::div");
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
+
 
     //对手机框进行输入
     public void inputPhone(String phone) {
@@ -62,31 +64,23 @@ public class LoginPage {
         return "";
     }
 
-    //获取页面红色错误提示
-    public String getFormErrorText() {
-        WebElement element = waitElementBisibility(formErrorBy);
+    //获取页面手机红色错误提示
+    public String getPhoneFormErrorText() {
+        WebElement element = waitElementBisibility(phoneformErrorBy);
         if (element != null) {
             return element.getText();
         }
         return "";
     }
 
-    /**
-     * 封装显式等待
-     *
-     * @param by 元素定位信息
-     * @return 元素对象
-     */
-    public WebElement waitElementBisibility(By by) {
-        WebElement element = null;
-        try {
-            //5秒元素可见显式等待
-            WebDriverWait wait = new WebDriverWait(driver, 5);
-            element = wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-            return element;
-        } catch (Exception e) {
-            System.out.println("元素定位异常" + e.getMessage());
+    //获取页面手机红色错误提示
+    public String getPasswordFormErrorText() {
+        WebElement element = waitElementBisibility(passwordformErrorBy);
+        if (element != null) {
+            return element.getText();
         }
-        return null;
+        return "";
     }
+
+
 }

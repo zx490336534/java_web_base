@@ -1,5 +1,7 @@
 package com.zhongxin.cases;
 
+import com.zhongxin.common.BaseCase;
+import com.zhongxin.common.Constants;
 import com.zhongxin.pages.IndexPage;
 import com.zhongxin.pages.LoginPage;
 import okio.Timeout;
@@ -11,21 +13,22 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 
-public class LoginCase {
+public class LoginCase extends BaseCase {
     public WebDriver driver;
 
     @BeforeClass
     public void setUp() {
         //打开浏览器
-        driver = open("chrome");
+        driver = open(Constants.BROWSER_TYPE);
+    }
+
+    @BeforeMethod
+    public void setUpMethod() {
         //访问登陆页面
-        driver.get("http://120.78.128.25:8765/Index/login.html");
+        driver.get(Constants.LOGIN_URL);
     }
 
     @Test
@@ -80,7 +83,7 @@ public class LoginCase {
         Assert.assertEquals(actual, "帐号或密码错误!");
     }
 
-    @Test
+    @Test(priority = 1)
     public void testSuccess() throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
         loginpage.inputPhone("13323234545");

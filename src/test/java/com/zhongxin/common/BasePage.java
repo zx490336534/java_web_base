@@ -1,6 +1,7 @@
 package com.zhongxin.common;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -118,4 +119,17 @@ public class BasePage {
         return false;
     }
 
+    /**
+     * 输入键盘key
+     *
+     * @param by  元素定位
+     * @param key 键盘内容
+     */
+    public void inputKey(By by, Keys key) {
+        WebElement element = waitElementVisibility(by);
+        if (element != null) {
+            element.sendKeys(key);
+        }
+
+    }
 }

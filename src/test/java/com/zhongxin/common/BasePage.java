@@ -51,6 +51,12 @@ public class BasePage {
         return null;
     }
 
+    /**
+     * 输入文本框
+     *
+     * @param by      元素定位
+     * @param content 文本内容
+     */
     public void input(By by, String content) {
         WebElement element = waitElementClickable(by);
         if (element != null) {
@@ -58,4 +64,58 @@ public class BasePage {
             element.sendKeys(content);
         }
     }
+
+    /**
+     * 点击
+     *
+     * @param by 元素定位
+     */
+    public void click(By by) {
+        WebElement element = waitElementClickable(by);
+        if (element != null) {
+            element.click();
+        }
+    }
+
+    /**
+     * 获取元素的文本
+     *
+     * @param by 元素定位
+     */
+    public String getElementText(By by) {
+        WebElement element = waitElementVisibility(by);
+        if (element != null) {
+            return element.getText();
+        }
+        return "";
+    }
+
+    /**
+     * 获取元素的属性值
+     *
+     * @param by            元素定位
+     * @param attributeName 元素属性
+     */
+    public String getElementAttribute(By by, String attributeName) {
+        WebElement element = waitElementVisibility(by);
+        String value = "";
+        if (element != null) {
+            value = element.getAttribute(attributeName);
+        }
+        return value;
+    }
+
+    /**
+     * 元素是否可见
+     *
+     * @param by 元素定位
+     */
+    public boolean elementIsDisplayed(By by) {
+        WebElement element = waitElementVisibility(by);
+        if (element != null) {
+            return element.isDisplayed();
+        }
+        return false;
+    }
+
 }

@@ -3,7 +3,6 @@ package com.zhongxin.pages;
 import com.zhongxin.common.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
 
@@ -29,77 +28,45 @@ public class LoginPage extends BasePage {
 
     //对手机框进行输入
     public void inputPhone(String phone) {
-        WebElement element = waitElementVisibility(phoneBy);
-        if (element != null) {
-            element.clear();
-            element.sendKeys(phone);
-        }
+        input(phoneBy, phone);
     }
 
     //对密码框进行输入
     public void inputPassword(String password) {
-        WebElement element = waitElementVisibility(passwordBy);
-        if (element != null) {
-            element.clear();
-            element.sendKeys(password);
-        }
+        input(passwordBy, password);
     }
 
     //点击登陆按钮
     public void clickLoginBtn() {
-        WebElement element = waitElementVisibility(loginBtnBy);
-        if (element != null) {
-            element.click();
-        }
-
+        click(loginBtnBy);
     }
 
     //获取页面中央错误提示文本
     public String getCenterErrorText() {
-        WebElement element = waitElementVisibility(centerErrorBy);
-        if (element != null) {
-            return element.getText();
-        }
-        return "";
+        return getElementText(centerErrorBy);
+
     }
 
     //获取页面手机红色错误提示
     public String getPhoneFormErrorText() {
-        WebElement element = waitElementVisibility(phoneformErrorBy);
-        if (element != null) {
-            return element.getText();
-        }
-        return "";
+        return getElementText(phoneformErrorBy);
     }
 
     //获取页面手机红色错误提示
     public String getPasswordFormErrorText() {
-        WebElement element = waitElementVisibility(passwordformErrorBy);
-        if (element != null) {
-            return element.getText();
-        }
-        return "";
+        return getElementText(passwordformErrorBy);
     }
 
     //勾选记住手机号码
     public void CheckRememberMe() {
-        WebElement element = waitElementClickable(rememberMeBy);
-        String checked = element.getAttribute("checked");
+        String checked = getElementAttribute(rememberMeBy, "checked");
         if (!"true".equals(checked)) {
-            if (element != null) {
-                element.click();
-            }
+            click(rememberMeBy);
         }
     }
 
     //获取手机号码
     public String getPhoneValue() {
-        WebElement element = waitElementClickable(phoneBy);
-        String value = "";
-        if (element != null) {
-            value = element.getAttribute("value");
-        }
-        return value;
+        return getElementAttribute(phoneBy, "value");
     }
-
 }

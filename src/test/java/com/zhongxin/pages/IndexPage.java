@@ -3,7 +3,6 @@ package com.zhongxin.pages;
 import com.zhongxin.common.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class IndexPage extends BasePage {
 
@@ -22,26 +21,15 @@ public class IndexPage extends BasePage {
 
     // 昵称是否可见
     public boolean nicknameIsVisibility() {
-        WebElement element = waitElementVisibility(nicknameBy);
-        if (element != null) {
-            return element.isDisplayed();
-        }
-        return false;
+        return elementIsDisplayed(nicknameBy);
     }
 
     public void clickLogout() {
-        WebElement element = waitElementClickable(logoutBtnBy);
-        if (element != null) {
-            element.click();
-        }
+        click(logoutBtnBy);
     }
 
     public void clickLogin() {
-        WebElement element = waitElementClickable(logintBtnBy);
-        System.out.println("element" + element);
-        if (element != null) {
-            element.click();
-        }
+        click(logintBtnBy);
     }
 
 }

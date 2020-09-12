@@ -93,6 +93,20 @@ public class LoginCase {
 
     }
 
+    @Test
+    public void testSuccess02() throws InterruptedException {
+        LoginPage loginpage = new LoginPage(driver);
+        loginpage.inputPhone("13323234545");
+        loginpage.inputPassword("lemon123456");
+        loginpage.CheckRememberMe();
+        loginpage.clickLoginBtn();
+        IndexPage indexPage = new IndexPage(driver);
+        indexPage.clickLogout();
+        indexPage.clickLogin();
+        String actual = loginpage.getPhoneValue();
+        Assert.assertEquals(actual, "13323234545");
+    }
+
     @DataProvider
     public Object[][] datas() {
         Object[][] datas = {

@@ -1,14 +1,11 @@
 package com.zhongxin.pages;
 
+import com.zhongxin.common.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
-
-    private WebDriver driver;
 
     // phone元素定位信息
     private By phoneBy = By.name("phone");
@@ -22,6 +19,8 @@ public class LoginPage extends BasePage {
     private By phoneformErrorBy = By.xpath("//input[@name='phone']//following-sibling::div");
     //页面密码红色错误提示
     private By passwordformErrorBy = By.xpath("//input[@name='password']//following-sibling::div");
+    //记住手机号码
+    private By rememberMeBy = By.name("remember_me");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -30,7 +29,7 @@ public class LoginPage extends BasePage {
 
     //对手机框进行输入
     public void inputPhone(String phone) {
-        WebElement element = waitElementBisibility(phoneBy);
+        WebElement element = waitElementVisibility(phoneBy);
         if (element != null) {
             element.clear();
             element.sendKeys(phone);
@@ -39,7 +38,7 @@ public class LoginPage extends BasePage {
 
     //对密码框进行输入
     public void inputPassword(String password) {
-        WebElement element = waitElementBisibility(passwordBy);
+        WebElement element = waitElementVisibility(passwordBy);
         if (element != null) {
             element.clear();
             element.sendKeys(password);
@@ -48,7 +47,7 @@ public class LoginPage extends BasePage {
 
     //点击登陆按钮
     public void clickLoginBtn() {
-        WebElement element = waitElementBisibility(loginBtnBy);
+        WebElement element = waitElementVisibility(loginBtnBy);
         if (element != null) {
             element.click();
         }
@@ -57,7 +56,7 @@ public class LoginPage extends BasePage {
 
     //获取页面中央错误提示文本
     public String getCenterErrorText() {
-        WebElement element = waitElementBisibility(centerErrorBy);
+        WebElement element = waitElementVisibility(centerErrorBy);
         if (element != null) {
             return element.getText();
         }
@@ -66,7 +65,7 @@ public class LoginPage extends BasePage {
 
     //获取页面手机红色错误提示
     public String getPhoneFormErrorText() {
-        WebElement element = waitElementBisibility(phoneformErrorBy);
+        WebElement element = waitElementVisibility(phoneformErrorBy);
         if (element != null) {
             return element.getText();
         }
@@ -75,12 +74,32 @@ public class LoginPage extends BasePage {
 
     //获取页面手机红色错误提示
     public String getPasswordFormErrorText() {
-        WebElement element = waitElementBisibility(passwordformErrorBy);
+        WebElement element = waitElementVisibility(passwordformErrorBy);
         if (element != null) {
             return element.getText();
         }
         return "";
     }
 
+    //勾选记住手机号码
+    public void CheckRememberMe() {
+        WebElement element = waitElementClickable(rememberMeBy);
+        String checked = element.getAttribute("checked");
+        if (!"true".equals(checked)) {
+            if (element != null) {
+                element.click();
+            }
+        }
+    }
+
+    //获取手机号码
+    public String getPhoneValue() {
+        WebElement element = waitElementClickable(phoneBy);
+        String value = "";
+        if (element != null) {
+            value = element.getAttribute("value");
+        }
+        return value;
+    }
 
 }

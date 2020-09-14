@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 public class BackstageIndexPage extends BasePage {
     private WebDriver driver;
     //借款管理按钮
-    private By loanManageBy = By.xpath("//span[text()='借款管理']");
+    private By loanManageBy = By.partialLinkText("借款管理");
     //mainFrame
     private By mainFrameBy = By.id("mainFrame");
     //加标按钮
@@ -38,6 +38,12 @@ public class BackstageIndexPage extends BasePage {
     private By jobBy = By.xpath("//td[text()='职业:']//following-sibling::td/input");
     //年龄
     private By ageBy = By.xpath("//td[text()='年龄:']//following-sibling::td/input");
+    //提交
+    private By addDoBy = By.id("add_do");
+    //审核按钮
+    private By checkBy = By.id("check");
+    //审核通过按钮
+    private By checkPassBy = By.xpath("//*[@id=\"check_loan\"]/div[2]/a[1]/span/span");
 
     public BackstageIndexPage(WebDriver driver) {
         super(driver);
@@ -64,6 +70,87 @@ public class BackstageIndexPage extends BasePage {
             e.printStackTrace();
             System.out.println("元素定位异常" + e.getMessage());
         }
-
     }
+
+    //贷款标题
+    public void inputTitle(String title) {
+        input(titleBy, title);
+    }
+
+    //年利率利息
+    public void inputloanRate(String loanRate) {
+        input(loanRateBy, loanRate);
+    }
+
+    //借款期限
+    public void inputloanTerm(String loanTerm) {
+        input(loanTermBy, loanTerm);
+    }
+
+    //借款额度
+    public void inputamount(String amount) {
+        input(amountBy, amount);
+    }
+
+    //竞标期限
+    public void inputbiddingDays(String biddingDays) {
+        input(biddingDaysBy, biddingDays);
+    }
+
+    //风控评测
+    public void clickevaluation() {
+        click(evaluationBy);
+    }
+
+    //评估价值
+    public void inputevaluAmount(String evaluAmount) {
+        input(evaluAmountBy, evaluAmount);
+    }
+
+    //项目录入
+    public void clickprojectInput() {
+        click(projectInputBy);
+    }
+
+    //籍贯
+    public void inputhometown(String hometown) {
+        input(hometownBy, hometown);
+    }
+
+    //职业
+    public void inputjob(String job) {
+        input(jobBy, job);
+    }
+
+    //年龄
+    public void inputage(String age) {
+        input(ageBy, age);
+    }
+
+    //提交
+    public void clickAdddo() {
+        click(addDoBy);
+    }
+
+    //点击标题相对的一行数据
+    public void clickTitleRow(String title) {
+        try {
+            Thread.sleep(1000);
+            By by = By.xpath("//div[text=']" + title + "']/parent::td/parent::tr");
+            click(by);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //点击审核按钮
+    public void clickCheck() {
+        click(checkBy);
+    }
+
+    //点击审核通过按钮
+    public void clickCheckPass() {
+        click(checkPassBy);
+    }
+
 }

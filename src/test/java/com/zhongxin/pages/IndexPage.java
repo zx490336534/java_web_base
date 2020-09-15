@@ -32,4 +32,12 @@ public class IndexPage extends BasePage {
         click(logintBtnBy);
     }
 
+    //点击抢投标
+    public void clickBidding(String title) {
+        //抢投标
+        By biddingBy = By.xpath("//span[contains(text(),'" + title +
+                "')]/parent::div/parent::a/following-sibling::div//a[text()='抢投标']");
+        click(biddingBy);
+    }
+
 }

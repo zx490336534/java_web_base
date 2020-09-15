@@ -17,5 +17,9 @@ public class Constants {
     public static final String ADMIN_PASSWORD = "lemonbest";
     // 浏览器类型
     public static final String BROWSER_TYPE = "chrome";
+    //投资账号
+    public static final String INVEST_USERNAME = "13323234545";
+    //投资密码
+    public static final String INVEST_PASSWORD = "lemon123456";
 
 }

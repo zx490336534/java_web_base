@@ -1,5 +1,6 @@
 package com.zhongxin.common;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
+    private Logger log = Logger.getLogger(BasePage.class);
+
     private WebDriver driver;
 
     public BasePage(WebDriver driver) {
@@ -21,6 +24,7 @@ public class BasePage {
      * @return 元素对象
      */
     public WebElement waitElementVisibility(By by) {
+        log.info(by);
         WebElement element = null;
         try {
             //5秒元素可见显式等待
@@ -28,7 +32,7 @@ public class BasePage {
             element = wait.until(ExpectedConditions.visibilityOfElementLocated(by));
             return element;
         } catch (Exception e) {
-            System.out.println("元素定位异常" + e.getMessage());
+            log.error("元素定位异常" + e.getMessage());
         }
         return null;
     }
@@ -40,6 +44,7 @@ public class BasePage {
      * @return 元素对象
      */
     public WebElement waitElementClickable(By by) {
+        log.info(by);
         WebElement element = null;
         try {
             //5秒元素可见显式等待
@@ -47,7 +52,7 @@ public class BasePage {
             element = wait.until(ExpectedConditions.elementToBeClickable(by));
             return element;
         } catch (Exception e) {
-            System.out.println("元素定位异常" + e.getMessage());
+            log.error("元素定位异常" + e.getMessage());
         }
         return null;
     }

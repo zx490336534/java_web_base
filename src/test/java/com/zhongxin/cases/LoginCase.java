@@ -2,16 +2,14 @@ package com.zhongxin.cases;
 
 import com.zhongxin.common.BaseCase;
 import com.zhongxin.common.Constants;
+import com.zhongxin.listeners.MyRetry;
 import com.zhongxin.pages.IndexPage;
 import com.zhongxin.pages.LoginPage;
-import okio.Timeout;
-import org.openqa.selenium.*;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -31,7 +29,7 @@ public class LoginCase extends BaseCase {
         driver.get(Constants.LOGIN_URL);
     }
 
-    @Test
+    @Test(retryAnalyzer = MyRetry.class)
     public void testFailed01() throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
         loginpage.inputPhone("13212312312");

@@ -1,6 +1,7 @@
 package com.zhongxin.pages;
 
 import com.zhongxin.common.BasePage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -33,6 +34,5 @@ public class BackstageLoginPage extends BasePage {
     public void clickLoginBtn() {
         click(loginBtnBy);
     }
-
 
 }

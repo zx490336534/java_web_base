@@ -1,6 +1,7 @@
 package com.zhongxin.pages;
 
 import com.zhongxin.common.BasePage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -24,7 +25,6 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-
 
     //对手机框进行输入
     public void inputPhone(String phone) {

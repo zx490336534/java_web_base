@@ -1,8 +1,6 @@
 package com.zhongxin.cases;
 
-import com.sun.prism.PresentableState;
 import com.zhongxin.common.BaseCase;
-import com.zhongxin.common.BasePage;
 import com.zhongxin.common.Constants;
 import com.zhongxin.pages.*;
 import com.zhongxin.pages.LoginPage;

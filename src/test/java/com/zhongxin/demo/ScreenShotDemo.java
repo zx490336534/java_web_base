@@ -13,7 +13,7 @@ public class ScreenShotDemo extends BaseCase {
     @Test
     public void test() throws Exception {
         WebDriver driver = open("chrome");
-        driver.get("htts://www.baidu.com");
+        driver.get("https://www.baidu.com");
         Thread.sleep(2000);
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File file = screenshot.getScreenshotAs(OutputType.FILE);

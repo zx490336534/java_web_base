@@ -1,6 +1,7 @@
 package com.zhongxin.pages;
 
 import com.zhongxin.common.BasePage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -13,11 +14,9 @@ public class IndexPage extends BasePage {
     //登陆按钮
     private By logintBtnBy = By.linkText("登录");
 
-
     public IndexPage(WebDriver driver) {
         super(driver);
     }
-
 
     // 昵称是否可见
     public boolean nicknameIsVisibility() {
@@ -35,8 +34,8 @@ public class IndexPage extends BasePage {
     //点击抢投标
     public void clickBidding(String title) {
         //抢投标
-        By biddingBy = By.xpath("//span[contains(text(),'" + title +
-                "')]/parent::div/parent::a/following-sibling::div//a[text()='抢投标']");
+        By biddingBy = By.xpath("//span[contains(text(),'" + title
+            + "')]/parent::div/parent::a/following-sibling::div//a[text()='抢投标']");
         click(biddingBy);
     }
 

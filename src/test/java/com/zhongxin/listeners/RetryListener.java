@@ -14,7 +14,6 @@ public class RetryListener implements IAnnotationTransformer {
         if (retryAnalyzer == null) {
             //@Test 没有设置retryAnalyzer属性，帮你设置一个属性
             iTestAnnotation.setRetryAnalyzer(MyRetry.class);
-
         }
     }
 }

@@ -30,9 +30,9 @@ public class BaseCase {
         if ("chrome".equalsIgnoreCase(type)) {
             System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
             driver = new ChromeDriver();
-//            ChromeOptions chromeOptions = new ChromeOptions();
-//            chromeOptions.addArguments("--headless");
-//            driver = new ChromeDriver(chromeOptions);
+            // ChromeOptions chromeOptions = new ChromeOptions();
+            // chromeOptions.addArguments("--headless");
+            // driver = new ChromeDriver(chromeOptions);
         } else if ("ie".equalsIgnoreCase(type)) {
             // 设置ie启动项
             DesiredCapabilities capabilities = new DesiredCapabilities();

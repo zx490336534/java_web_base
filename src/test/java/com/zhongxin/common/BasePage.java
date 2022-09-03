@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
-    private Logger log = Logger.getLogger(BasePage.class);
+    private final Logger log = Logger.getLogger(BasePage.class);
 
     private WebDriver driver;
 

@@ -4,6 +4,7 @@ import com.zhongxin.common.BaseCase;
 import com.zhongxin.common.Constants;
 import com.zhongxin.pages.BackstageIndexPage;
 import com.zhongxin.pages.BackstageLoginPage;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -28,7 +29,6 @@ public class AddloanCase extends BaseCase {
         Thread.sleep(3000);
         close(driver);
     }
-
 
     @Test
     public void test() throws InterruptedException {
@@ -69,7 +69,6 @@ public class AddloanCase extends BaseCase {
         indexPage.clickTitleRow(title);
         indexPage.clickCheck();
         indexPage.clickCheckPass();
-
 
     }
 }
